@@ -117,7 +117,13 @@ namespace ShortURLService.Controllers
                 else
                 {
                     existingURL.ShortUrl = Request.Url.Scheme + "://" + Request.Url.Authority + "/" + existingURL.ShortUrl;
-                    return Json(new { status = true, url = existingURL }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = true, url = new URL()
+                    {
+                        ShortUrl = existingURL.ShortUrl,
+                        LongUrl = existingURL.LongUrl,
+                        GeneratedDate = existingURL.GeneratedDate,
+                        Hits = existingURL.Hits,
+                    }, }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
